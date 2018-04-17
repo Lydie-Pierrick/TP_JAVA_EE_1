@@ -10,24 +10,23 @@
         <h:messages styleClass="alert alert-error"/>
 
         <h:form class="form-horizontal">
-            <div class="control-group">
-                <label class="control-label" for="inputNickName">Username</label>
-                <div class="controls">
-                    <input id="inputNickName" placeholder="Username"/>
-                </div>
-            </div>
-            <div class="control-group">
-                <label class="control-label" for="inputPassword">Password</label>
-                <div class="controls">
-                    <input id="inputPassword" placeholder="Password"/>
-                </div>
-            </div>
-            <div class="control-group">
-                <div class="controls">
-                    <input type="button" class="btn" value="Log me in"/>
-                </div>
-            </div>
+            <h:panelGroup layout="block" styleClass="control-group">
+                <h:outputLabel styleClass="control-label" for="inputNickName">Username</h:outputLabel>
+                <h:panelGroup layout="block" styleClass="controls">
+                    <h:inputText id="inputNickName" value="#{user.name}"/>
+                </h:panelGroup>
+            </h:panelGroup>
+            <h:panelGroup layout="block" styleClass="control-group">
+                <h:outputLabel styleClass="control-label" for="inputPassword">Password</h:outputLabel>
+                <h:panelGroup layout="block" styleClass="controls">
+                    <h:inputSecret id="inputPassword" value="#{user.password}"/>
+                </h:panelGroup>
+            </h:panelGroup>
+            <h:panelGroup layout="block" styleClass="control-group">
+                <h:panelGroup layout="block" styleClass="controls">
+                    <h:commandButton styleClass="btn" value="Log me in" action="#{auth.login(user)}"/>
+                </h:panelGroup>
+            </h:panelGroup>
         </h:form>
     </ui:define>
-
 </ui:composition>

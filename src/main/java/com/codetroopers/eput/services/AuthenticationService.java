@@ -11,7 +11,7 @@ import javax.inject.Named;
 import java.io.Serializable;
 
 
-@Named
+@Named("auth")
 @ApplicationScoped
 public class AuthenticationService implements Serializable {
 
