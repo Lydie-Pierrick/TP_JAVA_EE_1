@@ -13,18 +13,18 @@
             <h:panelGroup layout="block" styleClass="control-group">
                 <h:outputLabel styleClass="control-label" for="inputNickName">Username</h:outputLabel>
                 <h:panelGroup layout="block" styleClass="controls">
-                    <h:inputText id="inputNickName" value="#{user.name}"/>
+                    <h:inputText id="inputNickName" value="#{userInfo.name}"/>
                 </h:panelGroup>
             </h:panelGroup>
             <h:panelGroup layout="block" styleClass="control-group">
                 <h:outputLabel styleClass="control-label" for="inputPassword">Password</h:outputLabel>
                 <h:panelGroup layout="block" styleClass="controls">
-                    <h:inputSecret id="inputPassword" value="#{user.password}"/>
+                    <h:inputSecret id="inputPassword" value="#{userInfo.password}"/>
                 </h:panelGroup>
             </h:panelGroup>
             <h:panelGroup layout="block" styleClass="control-group">
                 <h:panelGroup layout="block" styleClass="controls">
-                    <h:commandButton styleClass="btn" value="Log me in" action="#{auth.login(user)}"/>
+                    <h:commandButton styleClass="btn" value="Log me in" action="#{auth.login(userInfo)}"/>
                 </h:panelGroup>
             </h:panelGroup>
         </h:form>

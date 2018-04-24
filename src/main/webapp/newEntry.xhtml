@@ -9,6 +9,7 @@
         Create Entry :<br/>
         <h:form>
             Message : <h:inputTextarea value="#{newBookEntry.content}"></h:inputTextarea><br/>
+            Note : <h:inputTextarea value="#{newBookEntry.note}"></h:inputTextarea><br/>
             <h:commandButton value="Save"
                              action="#{goldenBookEntryController.insertNewEntry}"/>
         </h:form>

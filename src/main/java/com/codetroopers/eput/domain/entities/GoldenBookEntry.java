@@ -5,6 +5,7 @@ import java.util.Date;
 
 
 @Entity
+@Table(name = "goldenbookentry") // <2>
 public class GoldenBookEntry {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -13,19 +14,21 @@ public class GoldenBookEntry {
     private String content;
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
+    private Integer note;
 
     public GoldenBookEntry() {
         this.createdAt = new Date();
     }
 
-    public GoldenBookEntry(final String author, final String content) {
-        this(author, content, new Date());
+    public GoldenBookEntry(final String author, final String content, final Integer note) {
+        this(author, content, new Date(), note);
     }
 
-    public GoldenBookEntry(final String author, final String content, final Date createdAt) {
+    public GoldenBookEntry(final String author, final String content, final Date createdAt, final Integer note) {
         this.author = author;
         this.content = content;
         this.createdAt = createdAt;
+        this.note = note;
     }
 
     /************************** GETTER / SETTERS ****************************/
@@ -59,5 +62,13 @@ public class GoldenBookEntry {
 
     public void setAuthor(final String author) {
         this.author = author;
+    }
+
+    public Integer getNote() {
+        return note;
+    }
+
+    public void setNote(final Integer note) {
+        this.note = note;
     }
 }

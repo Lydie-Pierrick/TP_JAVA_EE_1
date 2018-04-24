@@ -7,6 +7,7 @@
         <ui:repeat value="#{loadGoldenBookEntries}" var="entry">
             <div class="well-large">
                 <div class="item">#{entry.content}</div>
+                <div class="note">Note #{entry.note}.</div>
                 <div class="info">On #{entry.createdAt}, by #{entry.author}.</div>
             </div>
         </ui:repeat>

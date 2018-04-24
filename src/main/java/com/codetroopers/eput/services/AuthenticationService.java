@@ -1,6 +1,7 @@
 package com.codetroopers.eput.services;
 
 
+import com.codetroopers.eput.domain.UserDAO;
 import com.codetroopers.eput.models.UserInfo;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -17,6 +18,8 @@ public class AuthenticationService implements Serializable {
 
     @Inject
     FacesContext facesContext;
+    @Inject
+    UserDAO userDAO;
 
     /**
      * Login method checking if the supplied userInfo matches our condition on its password/nickname combination :
@@ -27,9 +30,10 @@ public class AuthenticationService implements Serializable {
      * @return next view to show / null if a refresh is needed
      */
     public String login(final UserInfo userInfo) {
-        if ("tpjava".equals(userInfo.getName()) && "secret".equals(userInfo.getPassword())) {
+        if (userDAO.isValidLogin(userInfo.getName(), userInfo.getPassword())) {
             userInfo.setLoggedIn(true);
-            return "success";
+
+            return "entries";
         }
         facesContext.addMessage("Invalid credentials", new FacesMessage("Invalid credentials !"));
         return null;

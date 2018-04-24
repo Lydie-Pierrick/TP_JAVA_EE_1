@@ -5,7 +5,7 @@ import javax.inject.Named;
 import java.io.Serializable;
 
 
-@Named("user")
+@Named("userInfo")
 @SessionScoped
 public class UserInfo implements Serializable {
 

@@ -17,6 +17,7 @@
 package com.codetroopers.eput.domain;
 
 import com.codetroopers.eput.domain.entities.GoldenBookEntry;
+import com.codetroopers.eput.domain.entities.User;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -32,13 +33,16 @@ public class GoldenBookEntryDAO {
 
     public List<GoldenBookEntry> all() {
         List<GoldenBookEntry> bookEntries = new ArrayList<>();
+        bookEntries = em.createQuery("SELECT g FROM GoldenBookEntry g", GoldenBookEntry.class).getResultList();
+
+        /*List<GoldenBookEntry> bookEntries = new ArrayList<>();
         bookEntries.add(new GoldenBookEntry("John", "C'est trop bien, je peux plus m'en passer"));
         bookEntries.add(new GoldenBookEntry("Henry", "waaaaaa, j'adore"));
-        bookEntries.add(new GoldenBookEntry("Marc", "Je veux la même chez moi !"));
+        bookEntries.add(new GoldenBookEntry("Marc", "Je veux la même chez moi !"));*/
         return bookEntries;
     }
 
-    public GoldenBookEntry create() {
-        return null;
+    public void create(GoldenBookEntry gbe) {
+        em.persist(gbe);
     }
 }

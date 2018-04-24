@@ -22,8 +22,7 @@ public class GoldenBookEntryService {
 
 
     public void insertNewGoldenBookEntry(final GoldenBookEntry entry) {
-
-
+        bookEntryDAO.create(entry);
     }
 
     @Produces
@@ -31,4 +30,6 @@ public class GoldenBookEntryService {
     public List<GoldenBookEntry> loadGoldenBookEntries() {
         return bookEntryDAO.all();
     }
+
+
 }

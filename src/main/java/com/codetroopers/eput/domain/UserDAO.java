@@ -16,6 +16,7 @@
 
 package com.codetroopers.eput.domain;
 
+import com.codetroopers.eput.InjectInfo;
 import com.codetroopers.eput.domain.entities.User;
 
 import javax.ejb.Stateless;
@@ -47,6 +48,16 @@ public class UserDAO {
     public User save(User user) {
         em.persist(user);
         return user;
+    }
+
+    public boolean isValidLogin(String login, String password)
+    {
+        List<User> test = em.createQuery("SELECT u FROM User u WHERE NAME LIKE :login AND PASSWORD LIKE :password", User.class).setParameter("login", login).setParameter("password", password).getResultList();
+
+        if(!test.isEmpty())
+            return true;
+
+        return false;
     }
 }
 //end::class[]
