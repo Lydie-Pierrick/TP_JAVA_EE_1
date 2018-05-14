@@ -21,6 +21,8 @@ import com.codetroopers.eput.domain.entities.User;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.inject.Named;
+import javax.ws.rs.Produces;
 import java.util.List;
 
 /**
@@ -32,6 +34,8 @@ public class UserService {
     @Inject
     public UserDAO userDAO; // <1>
 
+    @Produces
+    @Named("loadAllUsers")
     public List<User> all(){
         return userDAO.all();
     }

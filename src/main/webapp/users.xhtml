@@ -9,8 +9,6 @@
             <h:panelGroup layout="block" styleClass="well-large">
                 <h:panelGroup layout="block" styleClass="item">#{entry.content}</h:panelGroup>
                 <h:panelGroup layout="block" styleClass="info">Note : #{entry.note}. On #{entry.createdAt}, by #{entry.author}.</h:panelGroup>
-                <h:commandButton value="Delete"
-                                 action="#{goldenBookEntryController.deleteEntry(entry)}"/>
             </h:panelGroup>
         </ui:repeat>
     </ui:define>

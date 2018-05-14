@@ -16,12 +16,15 @@
 
 package com.codetroopers.eput.domain;
 
-import com.codetroopers.eput.InjectInfo;
 import com.codetroopers.eput.domain.entities.User;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import java.sql.ResultSet;
 import java.util.List;
 
 /**
@@ -31,7 +34,7 @@ import java.util.List;
 @Stateless
 public class UserDAO {
     @Inject
-    EntityManager em;
+    private EntityManager em;
 
     //tag::allMethod[]
     public List<User> all(){
@@ -39,6 +42,30 @@ public class UserDAO {
     }
     //end::allMethod[]
 
+    public User getUserByName(String name){
+        String s = "SELECT u FROM User u WHERE NAME=?";
+        Query query = em.createQuery(s, User.class);
+        query.setParameter(1, name);
+
+        List<User> result = query.getResultList();
+
+        if(!result.isEmpty())
+            return result.get(0);
+        else
+            return null;
+    }
+    public boolean isValidLogin(String name, String password){
+        User user  = getUserByName(name);
+
+        if(user == null)
+            return false;
+        else{
+            if(user.password.equals(password)) {
+                return true;
+            }else
+                return false;
+        }
+    }
     public User create() {
         User user = new User("NAME", "name@code-troopers.com");
         em.persist(user);
@@ -48,16 +75,6 @@ public class UserDAO {
     public User save(User user) {
         em.persist(user);
         return user;
-    }
-
-    public boolean isValidLogin(String login, String password)
-    {
-        List<User> test = em.createQuery("SELECT u FROM User u WHERE NAME LIKE :login AND PASSWORD LIKE :password", User.class).setParameter("login", login).setParameter("password", password).getResultList();
-
-        if(!test.isEmpty())
-            return true;
-
-        return false;
     }
 }
 //end::class[]

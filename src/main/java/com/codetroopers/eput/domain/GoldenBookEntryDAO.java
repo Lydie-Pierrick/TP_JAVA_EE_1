@@ -17,12 +17,12 @@
 package com.codetroopers.eput.domain;
 
 import com.codetroopers.eput.domain.entities.GoldenBookEntry;
-import com.codetroopers.eput.domain.entities.User;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -32,17 +32,25 @@ public class GoldenBookEntryDAO {
     EntityManager em;
 
     public List<GoldenBookEntry> all() {
-        List<GoldenBookEntry> bookEntries = new ArrayList<>();
-        bookEntries = em.createQuery("SELECT g FROM GoldenBookEntry g", GoldenBookEntry.class).getResultList();
-
-        /*List<GoldenBookEntry> bookEntries = new ArrayList<>();
-        bookEntries.add(new GoldenBookEntry("John", "C'est trop bien, je peux plus m'en passer"));
-        bookEntries.add(new GoldenBookEntry("Henry", "waaaaaa, j'adore"));
-        bookEntries.add(new GoldenBookEntry("Marc", "Je veux la même chez moi !"));*/
-        return bookEntries;
+        return em.createQuery("SELECT gb FROM GoldenBookEntry gb", GoldenBookEntry.class).getResultList();
     }
 
-    public void create(GoldenBookEntry gbe) {
-        em.persist(gbe);
+    public GoldenBookEntry save(GoldenBookEntry entry){
+        if(entry.getNote() <= 10  && entry.getNote() >= 0) {
+            em.persist(entry);
+            return entry;
+        }
+        return null;
+    }
+
+    public boolean delete(final GoldenBookEntry entry){
+        em.remove(entry);
+        return true;
+//        if (entry != null) {
+//            em.remove(entry);
+//            return true;
+//        }else{
+//            return false;
+//        }
     }
 }
