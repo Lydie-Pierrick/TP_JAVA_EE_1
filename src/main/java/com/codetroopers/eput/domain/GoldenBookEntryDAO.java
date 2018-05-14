@@ -35,11 +35,6 @@ public class GoldenBookEntryDAO {
         return em.createQuery("SELECT gb FROM GoldenBookEntry gb", GoldenBookEntry.class).getResultList();
     }
 
-    public GoldenBookEntry create(String author, String content, Date date, Integer note) {
-        GoldenBookEntry bookEntry = new GoldenBookEntry(author, content, date, note);
-        em.persist(bookEntry);
-        return bookEntry;
-    }
     public GoldenBookEntry save(GoldenBookEntry entry){
         if(entry.getNote() <= 10  && entry.getNote() >= 0) {
             em.persist(entry);
