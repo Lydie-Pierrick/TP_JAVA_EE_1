@@ -35,6 +35,12 @@ public class GoldenBookEntryService {
     }
 
     public boolean deleteGoldenBookEntry(final GoldenBookEntry entry){
+//        if( bookEntryDAO.delete(entry) == true){
+//            facesContext.addMessage("Successful deletion", new FacesMessage("The entry has been deleted."));
+//            return true;
+//        }else {
+//            return false;
+//        }
         return bookEntryDAO.delete(entry);
     }
 

@@ -17,8 +17,6 @@ public class GoldenBookEntry {
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
     private int note;
-//    @ElementCollection
-//    private List<String> tags = new ArrayList<>();
 
     public GoldenBookEntry() {
         this.createdAt = new Date();
