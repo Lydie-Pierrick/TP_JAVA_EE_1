@@ -1,11 +1,13 @@
 package com.codetroopers.eput.domain.entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 
 @Entity
-@Table(name = "goldenbookentry") // <2>
+@Table(name = "goldenBookEntry")
 public class GoldenBookEntry {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -14,17 +16,19 @@ public class GoldenBookEntry {
     private String content;
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
-    private Integer note;
+    private int note;
+//    @ElementCollection
+//    private List<String> tags = new ArrayList<>();
 
     public GoldenBookEntry() {
         this.createdAt = new Date();
     }
 
-    public GoldenBookEntry(final String author, final String content, final Integer note) {
-        this(author, content, new Date(), note);
+    public GoldenBookEntry(final String author, final String content) {
+        this(author, content, new Date(), 0);
     }
 
-    public GoldenBookEntry(final String author, final String content, final Date createdAt, final Integer note) {
+    public GoldenBookEntry(final String author, final String content, final Date createdAt, final int note) {
         this.author = author;
         this.content = content;
         this.createdAt = createdAt;
@@ -64,11 +68,11 @@ public class GoldenBookEntry {
         this.author = author;
     }
 
-    public Integer getNote() {
+    public int getNote() {
         return note;
     }
 
-    public void setNote(final Integer note) {
+    public void setNote(int note) {
         this.note = note;
     }
 }

@@ -6,6 +6,8 @@ import com.codetroopers.eput.models.UserInfo;
 
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Produces;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.List;
@@ -19,10 +21,21 @@ public class GoldenBookEntryService {
     UserInfo userInfo;
     @Inject
     GoldenBookEntryDAO bookEntryDAO;
+    @Inject
+    FacesContext facesContext;
 
 
-    public void insertNewGoldenBookEntry(final GoldenBookEntry entry) {
-        bookEntryDAO.create(entry);
+    public boolean insertNewGoldenBookEntry(final GoldenBookEntry entry) {
+        if(bookEntryDAO.save(entry) == null){
+            facesContext.addMessage("Invalid note", new FacesMessage("The value of note should be between 0 and 10 !"));
+            return false;
+        }else {
+            return true;
+        }
+    }
+
+    public boolean deleteGoldenBookEntry(final GoldenBookEntry entry){
+        return bookEntryDAO.delete(entry);
     }
 
     @Produces
@@ -30,6 +43,4 @@ public class GoldenBookEntryService {
     public List<GoldenBookEntry> loadGoldenBookEntries() {
         return bookEntryDAO.all();
     }
-
-
 }

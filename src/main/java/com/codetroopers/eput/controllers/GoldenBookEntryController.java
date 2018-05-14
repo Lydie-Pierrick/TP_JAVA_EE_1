@@ -10,7 +10,6 @@ import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-
 @Named
 @RequestScoped
 public class GoldenBookEntryController {
@@ -23,8 +22,10 @@ public class GoldenBookEntryController {
 
     public String insertNewEntry() {
         //here we persist our new Entry value
-        goldenBookEntryService.insertNewGoldenBookEntry(newEntry);
-        return "entries" + "?faces-redirect=true";
+        if(goldenBookEntryService.insertNewGoldenBookEntry(newEntry)) {
+            return "entries" + "?faces-redirect=true";
+        }
+        return null;
     }
 
     @Produces
@@ -39,5 +40,10 @@ public class GoldenBookEntryController {
         if (userInfo.getLoggedIn()) {
             newEntry.setAuthor(userInfo.getName());
         }
+    }
+
+    public String deleteEntry(final GoldenBookEntry entry) {
+        goldenBookEntryService.deleteGoldenBookEntry(entry);
+        return "success" + "?faces-redirect=true";
     }
 }
