@@ -43,7 +43,9 @@ public class GoldenBookEntryController {
     }
 
     public String deleteEntry(final GoldenBookEntry entry) {
-        goldenBookEntryService.deleteGoldenBookEntry(entry);
-        return "success" + "?faces-redirect=true";
+        if(goldenBookEntryService.deleteGoldenBookEntry(entry)) {
+            return "entries" + "?faces-redirect=true";
+        }
+        return null;
     }
 }

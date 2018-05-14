@@ -21,8 +21,7 @@ import com.codetroopers.eput.domain.entities.GoldenBookEntry;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import java.util.ArrayList;
-import java.util.Date;
+import javax.persistence.Query;
 import java.util.List;
 
 
@@ -44,13 +43,15 @@ public class GoldenBookEntryDAO {
     }
 
     public boolean delete(final GoldenBookEntry entry){
-        em.remove(entry);
-        return true;
-//        if (entry != null) {
+        if (entry != null) {
+//            em.getTransaction().begin();
 //            em.remove(entry);
-//            return true;
-//        }else{
-//            return false;
-//        }
+//            em.getTransaction().commit();
+            Query q = em.createQuery("DELETE FROM GoldenBookEntry WHERE id =" + entry.getId());
+            q.executeUpdate();
+            return true;
+        }else{
+            return false;
+        }
     }
 }
