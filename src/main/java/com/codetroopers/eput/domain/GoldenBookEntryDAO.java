@@ -42,16 +42,27 @@ public class GoldenBookEntryDAO {
         return null;
     }
 
-    public boolean delete(final GoldenBookEntry entry){
-        if (entry != null) {
+    public boolean delete(final Integer entryId){
+        if (entryId != null) {
 //            em.getTransaction().begin();
 //            em.remove(entry);
 //            em.getTransaction().commit();
-            Query q = em.createQuery("DELETE FROM GoldenBookEntry WHERE id =" + entry.getId());
+            Query q = em.createQuery("DELETE FROM GoldenBookEntry WHERE id =" + entryId);
             q.executeUpdate();
             return true;
         }else{
             return false;
         }
+    }
+
+    public Boolean ratingChange(Integer entryId, Integer rating, Long userId) {
+        if(entryId != null && rating != null && userId != null)
+        {
+            Query q = em.createQuery("UPDATE GoldenBookEntry SET note =" + rating + "WHERE id =" + entryId + "AND author =" + userId);
+            q.executeUpdate();
+            return true;
+        }
+
+        return false;
     }
 }

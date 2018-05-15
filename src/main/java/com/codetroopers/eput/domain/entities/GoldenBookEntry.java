@@ -13,6 +13,7 @@ public class GoldenBookEntry {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String author;
+    private String title;
     private String content;
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
@@ -31,6 +32,12 @@ public class GoldenBookEntry {
         this.content = content;
         this.createdAt = createdAt;
         this.note = note;
+    }
+
+    public GoldenBookEntry(Long userId, String title, String body) {
+        this(userId.toString(), body, new Date(), 0);
+        this.title = title;
+
     }
 
     /************************** GETTER / SETTERS ****************************/
@@ -72,5 +79,13 @@ public class GoldenBookEntry {
 
     public void setNote(int note) {
         this.note = note;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

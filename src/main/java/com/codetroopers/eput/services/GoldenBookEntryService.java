@@ -34,19 +34,23 @@ public class GoldenBookEntryService {
         }
     }
 
-    public boolean deleteGoldenBookEntry(final GoldenBookEntry entry){
+    public boolean deleteGoldenBookEntry(final Integer entryId){
 //        if( bookEntryDAO.delete(entry) == true){
 //            facesContext.addMessage("Successful deletion", new FacesMessage("The entry has been deleted."));
 //            return true;
 //        }else {
 //            return false;
 //        }
-        return bookEntryDAO.delete(entry);
+        return bookEntryDAO.delete(entryId);
     }
 
     @Produces
     @Named
     public List<GoldenBookEntry> loadGoldenBookEntries() {
         return bookEntryDAO.all();
+    }
+
+    public Boolean ratingChange(Integer entryId, Integer rating, Long userId) {
+        return bookEntryDAO.ratingChange(entryId, rating, userId);
     }
 }

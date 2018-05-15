@@ -3,15 +3,14 @@ package com.codetroopers.eput.ws;
 
 
 import com.codetroopers.eput.domain.entities.GoldenBookEntry;
+import com.codetroopers.eput.domain.entities.User;
 import com.codetroopers.eput.services.GoldenBookEntryService;
 
 import javax.inject.Inject;
-import javax.ws.rs.ApplicationPath;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Application;
 import javax.ws.rs.core.MediaType;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -19,7 +18,7 @@ import java.util.List;
  */
 //tag::class[]
 @ApplicationPath("ws") // <1>
-@Path("/entries") // <2>
+@Path("/goldenbook") // <2>
 @Produces(MediaType.APPLICATION_JSON) // <3>
 public class GoldenBookEntryWebService extends Application {
 
@@ -27,8 +26,32 @@ public class GoldenBookEntryWebService extends Application {
     GoldenBookEntryService goldenbookService;
 
     @GET // <4>
-    public List<GoldenBookEntry> goldenbook(){
+    public List<GoldenBookEntry> goldenbookList(){
         return goldenbookService.loadGoldenBookEntries();
+    }
+
+    @POST // <4>
+    public Boolean create(
+        @QueryParam("title") String title,
+        @QueryParam("body") String body,
+        @QueryParam("userId") Long userId){
+        GoldenBookEntry goldenBookEntry = new GoldenBookEntry(userId, title, body);
+        return goldenbookService.insertNewGoldenBookEntry(goldenBookEntry);
+    }
+
+    @PUT
+    public Boolean putRating(
+            @QueryParam("entryId") Integer entryId,
+            @QueryParam("rating") Integer rating,
+            @QueryParam("userId") Long userId){
+        return goldenbookService.ratingChange(entryId, rating, userId);
+    }
+
+    @DELETE
+    public Boolean delete(
+        @QueryParam("entryId") Integer entryId,
+        @QueryParam("userId") Long userId){
+            return goldenbookService.deleteGoldenBookEntry(entryId);
     }
 }
 //end::class[]

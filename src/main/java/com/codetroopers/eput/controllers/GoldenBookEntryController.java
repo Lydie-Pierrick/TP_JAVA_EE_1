@@ -42,8 +42,8 @@ public class GoldenBookEntryController {
         }
     }
 
-    public String deleteEntry(final GoldenBookEntry entry) {
-        if(goldenBookEntryService.deleteGoldenBookEntry(entry)) {
+    public String deleteEntry(final Integer entryId) {
+        if(goldenBookEntryService.deleteGoldenBookEntry(entryId)) {
             return "entries" + "?faces-redirect=true";
         }
         return null;
