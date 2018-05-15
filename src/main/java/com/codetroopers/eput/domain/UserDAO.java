@@ -54,6 +54,7 @@ public class UserDAO {
         else
             return null;
     }
+
     public boolean isValidLogin(String name, String password){
         User user  = getUserByName(name);
 
@@ -75,6 +76,16 @@ public class UserDAO {
     public User save(User user) {
         em.persist(user);
         return user;
+    }
+
+    public boolean delete(User user){
+        if (user != null) {
+            Query q = em.createQuery("DELETE FROM User WHERE id =" + user.getId());
+            q.executeUpdate();
+            return true;
+        }else{
+            return false;
+        }
     }
 }
 //end::class[]

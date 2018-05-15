@@ -2,14 +2,34 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
-                template="/WEB-INF/templates/default.xhtml">
+                template="/WEB-INF/templates/default.xhtml"
+                xmlns:f="http://java.sun.com/xml/ns/javaee">
 
     <ui:define name="content">
-        <ui:repeat value="#{loadGoldenBookEntries}" var="entry">
-            <h:panelGroup layout="block" styleClass="well-large">
-                <h:panelGroup layout="block" styleClass="item">#{entry.content}</h:panelGroup>
-                <h:panelGroup layout="block" styleClass="info">Note : #{entry.note}. On #{entry.createdAt}, by #{entry.author}.</h:panelGroup>
-            </h:panelGroup>
-        </ui:repeat>
+        <h:form>
+            <h:dataTable value = "#{userService.all()}" var = "user"
+                         border="2" cellspacing="1" cellpadding="1">
+
+                <h:column>
+                    <f:facet name = "header">ID : </f:facet>
+                    #{user.id}
+                </h:column>
+
+                <h:column>
+                    <f:facet name = "header">Name : </f:facet>
+                    #{user.name}
+                </h:column>
+
+                <h:column>
+                    <f:facet name = "header">Email : </f:facet>
+                    #{user.email}
+                </h:column>
+
+                <h:column>
+                    <h:commandButton value="Delete"
+                                     action="#{userService.delete(user)}"/>
+                </h:column>
+            </h:dataTable>
+        </h:form>
     </ui:define>
 </ui:composition>

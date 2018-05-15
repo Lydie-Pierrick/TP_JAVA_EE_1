@@ -48,9 +48,15 @@
 
                     <div class="nav-collapse">
                         <ul class="nav">
-                            <li><h:outputLink value="/tpjavaee/newEntry.jsf" rendered="#{userInfo.loggedIn}">
-                                Create Entry
-                            </h:outputLink>
+                            <li>
+                                <h:outputLink value="/tpjavaee/newEntry.jsf" rendered="#{userInfo.loggedIn}">
+                                    Create Entry
+                                </h:outputLink>
+                            </li>
+                            <li>
+                                <h:outputLink value="/tpjavaee/users.jsf" rendered="#{userInfo.loggedIn}">
+                                    Users
+                                </h:outputLink>
                             </li>
                         </ul>
 <!-- bad indent for asciidoc -->

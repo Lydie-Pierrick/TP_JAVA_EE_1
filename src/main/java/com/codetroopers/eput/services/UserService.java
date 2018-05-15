@@ -29,13 +29,12 @@ import java.util.List;
  * Created by cgatay on 19/01/16.
  */
 //tag::class[]
+@Named("userService")
 @Stateless
 public class UserService {
     @Inject
     public UserDAO userDAO; // <1>
 
-    @Produces
-    @Named("loadAllUsers")
     public List<User> all(){
         return userDAO.all();
     }
@@ -46,6 +45,10 @@ public class UserService {
 
     public User create(User user) {
         return userDAO.save(user);
+    }
+
+    public boolean delete(User user){
+        return userDAO.delete(user);
     }
 }
 //end::class[]
