@@ -29,7 +29,7 @@ public class GoldenBookEntryWebService extends Application {
     }
 
     @POST // <4>
-    public Boolean create(
+    public GoldenBookEntry create(
         @QueryParam("title") String title,
         @QueryParam("body") String body,
         @QueryParam("userId") Long userId){
@@ -46,10 +46,13 @@ public class GoldenBookEntryWebService extends Application {
     }
 
     @DELETE
-    public Boolean delete(
+    public Integer delete(
         @QueryParam("entryId") Integer entryId,
         @QueryParam("userId") Long userId){
-            return goldenbookService.deleteGoldenBookEntry(entryId);
+        if(goldenbookService.deleteGoldenBookEntry(entryId))
+            return 202;
+        else
+            return 404;
     }
 }
 //end::class[]

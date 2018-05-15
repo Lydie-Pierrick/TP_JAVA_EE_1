@@ -25,13 +25,12 @@ public class GoldenBookEntryService {
     FacesContext facesContext;
 
 
-    public boolean insertNewGoldenBookEntry(final GoldenBookEntry entry) {
+    public GoldenBookEntry insertNewGoldenBookEntry(final GoldenBookEntry entry) {
         if(bookEntryDAO.save(entry) == null){
             facesContext.addMessage("Invalid note", new FacesMessage("The value of note should be between 0 and 10 !"));
-            return false;
-        }else {
-            return true;
         }
+
+        return entry;
     }
 
     public boolean deleteGoldenBookEntry(final Integer entryId){
