@@ -3,14 +3,12 @@ package com.codetroopers.eput.ws;
 
 
 import com.codetroopers.eput.domain.entities.GoldenBookEntry;
-import com.codetroopers.eput.domain.entities.User;
 import com.codetroopers.eput.services.GoldenBookEntryService;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Application;
 import javax.ws.rs.core.MediaType;
-import java.util.Date;
 import java.util.List;
 
 /**
