@@ -8,6 +8,7 @@
         <h:messages styleClass="alert alert-error"/>
         Create Entry :<br/>
         <h:form>
+            Title : <h:inputTextarea value="#{newBookEntry.title}"></h:inputTextarea><br/>
             Message : <h:inputTextarea value="#{newBookEntry.content}"></h:inputTextarea><br/>
             Note : <h:inputText value="#{newBookEntry.note}"></h:inputText><br/>
             <h:commandButton value="Save"

@@ -22,7 +22,7 @@ public class GoldenBookEntryController {
 
     public String insertNewEntry() {
         //here we persist our new Entry value
-        if(goldenBookEntryService.insertNewGoldenBookEntry(newEntry)) {
+        if(goldenBookEntryService.insertNewGoldenBookEntry(newEntry) != null) {
             return "entries" + "?faces-redirect=true";
         }
         return null;
@@ -42,8 +42,8 @@ public class GoldenBookEntryController {
         }
     }
 
-    public String deleteEntry(final GoldenBookEntry entry) {
-        if(goldenBookEntryService.deleteGoldenBookEntry(entry)) {
+    public String deleteEntry(final Integer entryId) {
+        if(goldenBookEntryService.deleteGoldenBookEntry(entryId)) {
             return "entries" + "?faces-redirect=true";
         }
         return null;

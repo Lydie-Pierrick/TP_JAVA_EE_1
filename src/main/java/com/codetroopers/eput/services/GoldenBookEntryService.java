@@ -25,28 +25,31 @@ public class GoldenBookEntryService {
     FacesContext facesContext;
 
 
-    public boolean insertNewGoldenBookEntry(final GoldenBookEntry entry) {
+    public GoldenBookEntry insertNewGoldenBookEntry(final GoldenBookEntry entry) {
         if(bookEntryDAO.save(entry) == null){
             facesContext.addMessage("Invalid note", new FacesMessage("The value of note should be between 0 and 10 !"));
-            return false;
-        }else {
-            return true;
         }
+
+        return entry;
     }
 
-    public boolean deleteGoldenBookEntry(final GoldenBookEntry entry){
+    public boolean deleteGoldenBookEntry(final Integer entryId){
 //        if( bookEntryDAO.delete(entry) == true){
 //            facesContext.addMessage("Successful deletion", new FacesMessage("The entry has been deleted."));
 //            return true;
 //        }else {
 //            return false;
 //        }
-        return bookEntryDAO.delete(entry);
+        return bookEntryDAO.delete(entryId);
     }
 
     @Produces
     @Named
     public List<GoldenBookEntry> loadGoldenBookEntries() {
         return bookEntryDAO.all();
+    }
+
+    public Boolean ratingChange(Integer entryId, Integer rating, Long userId) {
+        return bookEntryDAO.ratingChange(entryId, rating, userId);
     }
 }
